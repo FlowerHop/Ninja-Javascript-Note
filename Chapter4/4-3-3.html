@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>4.3.3</title>
+	<script type="text/javascript" src="../scripts/assert.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/assert.css">
+</head>
+<body>
+    <input id="first"></input>
+    <input id="second"></input>
+
+    <script type="text/javascript">
+	    var elems = {
+	    	length: 0,
+
+	    	add: function (elem) {
+              Array.prototype.push.call (this, elem);
+	    	},
+
+	    	gather: function (id) {
+              this.add (document.getElementById (id));
+	    	}
+	    };
+
+	    elems.gather ('first');
+	    assert (elems.length == 1 && elems[0].nodeType, "There is one element.");
+	    elems.gather ('second');
+	    assert (elems.length == 2 && elems[1].nodeType, "There are two.");
+
+	    console.log (elems);
+    </script>
+
+</body>
+</html>

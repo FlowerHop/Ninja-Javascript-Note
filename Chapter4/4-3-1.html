@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chapter 4.3.1</title>
+	<script type="text/javascript" src="../scripts/assert.js"></script>
+    <link rel="stylesheet" type="text/css" href="../styles/assert.css">
+</head>
+<body>
+<script>
+    var store = {
+    	nextId: 1,
+    	cache: [],
+    	add: function (fn) {
+          if (!fn.id) {
+          	fn.id = store.nextId++;
+            return !!(store.cache[fn.id] = fn);	
+          }
+    	}
+    };
+
+	function ninja () {}
+	assert (store.add (ninja), 'Add function ninja first.');
+	assert (!store.add (ninja), 'It exists.');
+</script>
+</body>
+</html>

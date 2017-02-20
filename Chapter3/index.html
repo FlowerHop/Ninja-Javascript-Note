@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chapter 3</title>
+</head>
+    <script>
+    	(function () {
+    	  var queue = [],
+    	      paused = false,
+    	      results;
+
+    	  this.pause = function () {
+    	  	paused = true;
+    	  }
+
+    	  this.resume = function () {
+    	  	paused = false;
+    	  	setTimeout (runTest, 1);
+    	  }
+
+    	  this.runTest = function () {
+    	  	if (!paused && queue.length) {
+    	  	  queue.shift ()();
+    	  	  if (!paused) {
+    	  	  	resume ();
+    	  	  }
+    	  	}
+    	  }
+
+    	  this.test = function (name, fn) {
+            queue.push (function () {
+              results = document.getElementById ('results');
+              results = assert (true, name).appendChild (document.createElement ('ul'));
+              fn ();
+            });
+            runTest ();
+    	  }
+
+    	  this.assert = function (value, descript) {
+            var li = document.createElement ('li');
+            li.className = value ? 'pass' : 'fail';
+            li.appendChild (document.createTextNode (descript));
+            results.appendChild (li);
+
+            if (!value) {
+              li.parentNode.parentNode.className = 'fail';
+            }
+
+            return li;
+    	  }
+    	})();
+
+    	window.onload = function () {
+          test ('3.1', function () {
+            function namedFunction () {
+              console.log ('This is namedFunction.');
+            }
+
+            assert (typeof namedFunction === 'function', 'The type is a function.');
+            assert (namedFunction.name === 'namedFunction', 'The name of the property is namedFunction');
+
+            var anonymousFunction = function () {
+              console.log ('This is anonymousFunction');
+            }; 
+
+            assert (typeof anonymousFunction === 'function', 'The type is a function');
+            assert (anonymousFunction.name === '', 'No name');
+
+            var f = function name () { return true; };
+            assert (typeof f === 'function', 'The type is a function.');
+            assert (f.name === 'name', 'It has name property.');
+
+            function outer () {
+              assert (typeof inner === 'function', 'inner is a function.') ;
+              function inner () {};
+
+              assert (window.inner === undefined, 'inner is not in global scope.');
+            }
+
+            outer ();
+          });
+
+          test ('3.2', function () {
+            function outer () {
+              var a = 1;
+              function inner () {
+                var b = 2;
+                if (a == 1) {
+                   var c = 3;
+                }
+              }
+
+              assert (typeof c === 'number', 'c is a number');
+            }
+
+            outer ();
+
+            assert (typeof outer === 'function', 'outer is a function');
+            assert (window.inner === undefined, 'inner is not in global scope.');
+            assert (window.a === undefined, 'a is not in global scope.');
+            assert (window.b === undefined, 'b is not in global scope.');
+            assert (window.c === undefined, 'c is not in global scope.');
+          });
+    	};
+    </script>
+    <style>
+    	#results li.pass { color: green; }
+    	#results li.fail { color: red; }
+    </style>
+<body>
+    <ul id="results"></ul>
+</body>
+</html>
