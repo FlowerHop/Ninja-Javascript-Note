@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5.2.2.1</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../scripts/assert.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/assert.css">
+</head>
+<body>
+    <div id="testSubject">test</div>
+    <script type="text/javascript">
+        jQuery ('#testSubject').click (function () {
+        	var elem = jQuery ('#testSubject');
+        	elem.html ('Loading...');
+
+        	jQuery.ajax ({
+        	  url: "test.html",
+        	  success: function (html) {
+                elem.html (html);
+        	  }
+        	});
+        });
+    </script>
+
+</body>
+</html>

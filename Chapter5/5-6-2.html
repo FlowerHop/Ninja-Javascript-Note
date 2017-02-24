@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5.6.2</title>
+	<script type="text/javascript" src="../scripts/assert.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/assert.css">
+</head>
+<body>
+    <div>Div 0</div>
+    <div>Div 1</div>
+    <div>Div 2</div>
+    <script type="text/javascript">
+    	var divs = document.getElementsByTagName ('div');
+
+    	for (var i = 0; i < divs.length; i++) {
+    		(function (i) {
+    		    divs[i].addEventListener ('click', function () {
+                    console.log ('click on ' + i);
+    		    }, false);
+    		})(i);
+    	}
+    </script>
+
+</body>
+</html>

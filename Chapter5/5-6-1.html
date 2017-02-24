@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5.6.1</title>
+	<script type="text/javascript" src="../scripts/assert.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/assert.css">
+</head>
+<body>
+    <script type="text/javascript">
+    	var myObject = {
+    		value: 0, 
+    		addValue: function () {
+    			this.value++;
+    		}
+    	};
+
+        function wrap (object, method, wrapper) {
+            var fn = object[method];
+            return object[method] = function () {
+            	return wrapper.apply (this, [fn.bind (this)].concat (Array.prototype.slice.call (arguments)));
+            }
+        }
+
+        wrap (myObject, 'addValue', function (origin, value) {
+        	var arr = Array.prototype.slice.call (arguments);
+        	arr.shift ();
+        	
+        	if (arr.length > 0) {
+              for (var i = 0; i < arr.length; i++) {
+                myObject.value += arr[i];
+              }
+        	} else {
+              origin ();
+        	} 
+        });
+
+        myObject.addValue ();
+        assert (myObject.value == 1, 'add 1');
+        myObject.addValue (10);
+        assert (myObject.value == 11, 'add 10');
+        myObject.addValue (1, 2, 3);
+        assert (myObject.value == 17, 'add 1, 2, 3');
+    </script>
+
+</body>
+</html>

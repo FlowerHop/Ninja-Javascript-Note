@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5.4</title>
+	<script type="text/javascript" src="../scripts/assert.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/assert.css">
+</head>
+<body>
+    <script type="text/javascript">
+    	Function.prototype.curry = function () {
+    		var fn = this, args = Array.prototype.slice.call (arguments);
+    		return function () {
+    			return fn.apply (this, args.concat (Array.prototype.slice.call (arguments)));
+    		};
+    	};
+
+    	Function.prototype.partial = function () {
+    		var fn = this, args = Array.prototype.slice.call (arguments);
+
+    		return function () {
+    			var arg = 0;
+    			for (var i = 0; i < args.length && arg < arguments.length; i++) {
+    				if (args[i] === undefined) {
+    					args[i] = arguments[arg++];
+    				}
+    			}
+
+    			return fn.apply (this, args);
+    		};
+    	};
+
+    	var delay = setTimeout.partial (undefined, 5000);
+
+    	delay (function (a, b) {
+          console.log (arguments);
+          assert (true, 'It is called.');
+    	}.partial (1, 2));
+    </script>
+
+</body>
+</html>

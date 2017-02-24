@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5.3.1</title>
+	<script type="text/javascript" src="../scripts/assert.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/assert.css">
+</head>
+<body>
+    <button id='test'>click me</button>
+    <script type="text/javascript">
+  	    var button = {
+  	    	clicked: false, 
+  	    	click: function () {
+  	    		button.clicked = true;
+  	    		assert (this.clicked, 'The button has been clicked');
+  	    	}
+  	    }  
+ 
+  	    var elem = document.getElementById ('test');
+  	    elem.addEventListener ('click', button.click, false);
+    </script>
+
+</body>
+</html>
