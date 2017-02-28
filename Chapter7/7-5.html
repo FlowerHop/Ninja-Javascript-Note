@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>7.5</title>
+	<script type="text/javascript" src="../scripts/assert.js"></script>
+    <link rel="stylesheet" type="text/css" href="../styles/assert.css">
+</head>
+<body>
+    <script type="text/javascript">
+    	assert ("border-bottom-width".replace (/-(\w)/g, function (all, letter) {
+    	    return letter.toUpperCase ();
+    	}) == "borderBottomWidth", "replace");
+
+        function compress (source) {
+          var keys = {};
+          source.replace (/([^=&]+)=([^&]*)/g, function (all, key, value) {
+            keys[key] = (keys[key] ? keys[key] + "," : "") + value;
+            return "";
+          });
+
+          var result = [];
+          for (var key in keys) {
+          	result.push (key + "=" + keys[key]);
+          }
+
+          return result.join ("&");
+        }
+        
+    	assert (compress ("foo=1&foo=2&blah=a&blah=b&foo=3") == "foo=1,2,3&blah=a,b", "Compression success.");
+    </script>
+
+</body>
+</html>

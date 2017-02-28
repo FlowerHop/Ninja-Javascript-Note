@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>7.4.4</title>
+	<script type="text/javascript" src="../scripts/assert.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/assert.css">
+</head>
+<body>
+    <script type="text/javascript">
+    	var html = "<b class='hello'>Hello</b> <i>world!</i>";
+        var pattern = /<(\w+)([^>]*?)>(.*?)<\/\1>/g;
+
+        var match = pattern.exec (html);
+        assert (match[0] == "<b class='hello'>Hello</b>", "<b class='hello'>Hello</b>");
+        assert (match[1] == "b", "b");
+        assert (match[2] == " class='hello'", " class='hello'");
+        assert (match[3] == "Hello", "Hello");
+
+        match = pattern.exec (html);
+
+        assert (match[0] == "<i>world!</i>", "<i>world!</i>");
+        assert (match[1] == "i", "i");
+        assert (match[2] == "", "");
+        assert (match[3] == "world!", "world!");
+         
+        match = /<(\w+)([^>]*?)>(?:.*?)<\/\1>/g.exec (html);
+        assert (match[0] == "<b class='hello'>Hello</b>", "<b class='hello'>Hello</b>");
+        assert (match[1] == "b", "b");
+        assert (match[2] == " class='hello'", " class='hello'");
+        assert (match.length == 3, "1 tag and 2 captures");
+    </script>
+
+</body>
+</html>

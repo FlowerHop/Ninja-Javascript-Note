@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>7.4.3</title>
+	<script type="text/javascript" src="../scripts/assert.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/assert.css">
+</head>
+<body>
+    <script type="text/javascript">
+    	var html = "<div class='test'><b>Hello</b><i>world!</i></div>";
+        var tag = /<(\/?)(\w+)([^>]*?)>/g, match;
+        var num = 0;
+
+        while ((match = tag.exec (html)) != null) {
+            assert (match.length == 4, 'Find 1 tag, 3 captures');
+            num++;
+        }
+
+        assert (num == 6, '6 tags');
+    </script>
+
+</body>
+</html>

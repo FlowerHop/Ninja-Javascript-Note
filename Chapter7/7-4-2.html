@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>7.4.2</title>
+	<script type="text/javascript" src="../scripts/assert.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/assert.css">
+</head>
+<body>
+    <script type="text/javascript">
+    	var html = "<div class='test'><b>Hello</b><i>world!</i></div>";
+        var results = html.match (/<(\/?)(\w+)([^>]*?)>/);
+        assert (results[0] == "<div class='test'>", "<div class='test'>");
+        assert (results[1] == "", "");
+        assert (results[2] == "div", "div");
+        assert (results[3] == " class='test'", "class='test'");
+
+        var all = html.match (/<(\/?)(\w+)([^>]*?)>/g);
+        assert (all[0] == "<div class='test'>", "<div class='test'>");
+        assert (all[1] == "<b>", "<b>");
+        assert (all[2] == "</b>", "</b>");
+        assert (all[3] == "<i>", "<i>");
+        assert (all[4] == "</i>", "</i>");
+        assert (all[5] == "</div>", "</div>");
+    </script>
+
+</body>
+</html>

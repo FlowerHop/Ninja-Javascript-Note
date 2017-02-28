@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>7.6.1</title>
+	<script type="text/javascript" src="../scripts/assert.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/assert.css">
+</head>
+<body>
+    <script type="text/javascript">
+    	function simpleTrim (str) {
+          return (str || "").replace (/^\s+|\s+$/g, "");
+    	}
+
+        function doubleReplaceTrim (str) {
+          return (str || "").replace (/^\s\s*/, "")
+                            .replace (/\s\s*$/, "");
+        }
+
+        function cutFromEndTrim (str) {
+        	var str = str.replace (/^\s\s*/, ""),
+        	    ws = /\s/;
+        	    i = str.length;
+            while (ws.test (str.charAt (--i)));
+            return str.slice (0, i + 1);
+        }
+
+    	assert (simpleTrim (" simpleTrim ") == "simpleTrim", "simpleTrim");
+
+    	assert (doubleReplaceTrim ("  doubleReplaceTrim  ") == "doubleReplaceTrim", "doubleReplaceTrim");
+
+    	assert (cutFromEndTrim (" cutFromEndTrim     ") == "cutFromEndTrim", "cutFromEndTrim");
+    </script>
+
+</body>
+</html>

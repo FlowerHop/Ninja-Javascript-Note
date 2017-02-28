@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>7.6.2</title>
+	<script type="text/javascript" src="../scripts/assert.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles/assert.css">
+</head>
+<body>
+    <script type="text/javascript">
+    	var html = "<b>Hello</b>\n<i>world!</i>";
+        assert (/[\S\s]*/.exec (html) == "<b>Hello</b>\n<i>world!</i>", "<b>Hello</b>\n<i>world!</i>");
+        assert (/(?:.|\s)*/.exec (html) == "<b>Hello</b>\n<i>world!</i>", "<b>Hello</b>\n<i>world!</i>");
+    </script>
+
+</body>
+</html>
